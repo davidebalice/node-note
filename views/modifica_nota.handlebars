@@ -1,0 +1,16 @@
+<h3>Modifica le tue note</h3>
+
+<div class="card card-body mt-5">
+<form  action="/lista_note/{{nota.id}}?_method=POST" method="post">
+<input type="hidden" name="_method" value="POST">
+  <div class="form-group">
+    <label for="titolo">Titolo</label>
+    <input type="text" class="form-control" name="titolo" value="{{nota.titolo}}">
+  </div>
+  <div class="form-group">
+    <label for="contenuto">Contenuto</label>
+    <textarea class="form-control" name="testo">{{nota.contenuto}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-success" name="aggiungi">Invia</button>
+</form>
+</div>

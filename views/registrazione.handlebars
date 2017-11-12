@@ -1,0 +1,28 @@
+<h4 class="text-center bg-success col-sm-12 col-md-8 col-lg-8 m-auto">Crea un account</h4>
+<div class="col-sm-12 col-md-8 col-lg-8 m-auto">
+<div class="card my-5">
+<form class="p-5 mb-3" action="/registrazione" method="post"> 
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input type="text" class="form-control" name="nome" value="{{nome}}">
+  </div>
+   <div class="form-group">
+    <label for="cognome">Cognome</label>
+    <input type="text" class="form-control" name="cognome" value="{{cognome}}">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" value="{{email}}">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" value="{{password}}">
+  </div>
+   <div class="form-group">
+    <label for="password">Conferma Password</label>
+    <input type="password" class="form-control" name="conferma_psw" value="{{conferma_psw}}">
+  </div>
+  <button type="submit" class="btn btn-success">Invia</button>
+</form>
+</div>
+</div>
