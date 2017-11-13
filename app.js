@@ -19,9 +19,12 @@ app.use('/img' , express.static(__dirname + '/assets/img'));
 //INTEGRAZIONE FILE CONFIG PASSPORT
 require('./config/passport')(passport);
 
+//INTEGRAZIONE FILE CONFIG DATABASE
+const db = require('./config/database');
+
 //CONNESSIONE A MONGOOSE
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://<simo>:<simo>@ds159845.mlab.com:59845/note-prod || mongodb://localhost/note ' , {
+mongoose.connect(db.mongoURI, {
     useMongoClient: true,
   })
   .then(() => console.log(' Server connesso'))
