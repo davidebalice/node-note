@@ -1,5 +1,4 @@
-if(process.env.NODE_ENV === 'production'){
-    module.exports = {mongoURI: 'mongodb://simo:simo@ds159845.mlab.com:59845/note-prod'}
-}else{
-    module.exports = {mongoURI: 'mongodb://localhost/note'}
-}
+module.exports = {
+  mongoURI:
+    "mongodb+srv://davidebalice:31jTNuNccq7WnW0L@cluster0.uc77rcl.mongodb.net/Note?retryWrites=true&w=majority",
+};

@@ -1,12 +1,105 @@
-<div class="row">
-    <div class="col-sm-6 col-md-10 col-lg-10 m-auto">
-<div class="card  text-center">
-  <div class="card-body">
-    <h1 class="card-title">{{titolo}}</h1>
-    <p class="card-text">Scrivi le tue note per appuntare le tue idee al volo</p>
-    <a href="/aggiungi_nota" class="btn btn-success btn-block">Aggiungi una nuova nota</a>
+<!-- Modal -->
+<div
+  class="modal fade mt-5"
+  id="noteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered"
+    role="document"
+    style="max-width:700px !important;width:700px !important;"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...trh qr4yrt rt rt
+        <br />
+        ...trh qr4yrt rt rt
+        <br />
+        ...trh qr4yrt rt rt
+        <br />
+        ...trh qr4yrt rt rt
+        <br />
+        ...trh qr4yrt rt rt
+        <br />
+        ...trh qr4yrt rt rt
+        <br />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
-</div>
+
+<div class="row">
+  <div class="col-sm-6 col-md-10 col-lg-10 m-auto">
+    <div class="card text-center">
+      <div class="card-body">
+        <h1 class="card-title">{{title}}</h1>
+        <p class="card-text">Scrivi le tue note per appuntare le tue idee al
+          volo</p>
+        <a href="/add/note" class="btn btn-success btn-block">
+          Add Note
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="row note_container">
+  {{#each note}}
+    <div class="card card-body mb-5 note">
+      <div class="note-int" onclick="$().viewModal('{{_id}}')">
+        <p style="margin-left:auto">{{data}}</p>
+        <h5 id="title{{_id}}">{{title}}</h5>
+
+        <p>{{description}}</p>
+      </div>
+      <div
+        style="align-self: flex-end; display:flex; flex-direction:row;margin-top:auto"
+      >
+        <a
+          class="btn btn-primary"
+          href="{{base_url}}/edit/note/{{_id}}"
+        >Edit</a>
+        <form
+          action="{{base_url}}/delete/note/{{_id}}?_method=DELETE"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="DELETE" />
+          <input type="submit" class="btn btn-danger" value="Delete" />
+        </form>
+      </div>
+    </div>
+  {{else}}
+    <h3>Note not found</h3>
+  {{/each}}
+</div>
+
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModalCenter"
+>
+  Launch demo modal
+</button>

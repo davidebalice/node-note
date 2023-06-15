@@ -1,0 +1,29 @@
+<div class="row note_container">
+  {{#each note}}
+    <div class="card mb-5 note">
+      <h3>{{title}}</h3>
+      <p>{{data}}</p>
+      <p>{{description}}</p>
+      <p style="align-self: flex-end;">
+        <a
+          class="btn btn-primary btn-block mb-3"
+          href="{{base_url}}/edit/note/{{_id}}"
+        >Edit</a>
+        <form
+          action="{{base_url}}/delete/note/{{_id}}?_method=DELETE"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="DELETE" />
+          <input
+            type="submit"
+            class="btn btn-danger btn-block"
+            value="Delete"
+          />
+
+        </form>
+      </p>
+    </div>
+  {{else}}
+    <h3>Note not found</h3>
+  {{/each}}
+</div>

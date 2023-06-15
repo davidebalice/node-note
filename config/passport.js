@@ -1,40 +1,56 @@
-const LocalStrategy  = require('passport-local').Strategy;
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const LocalStrategy = require("passport-local").Strategy;
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
-//SCHEMA E MODELLO PER UTENTI
-require('../models/utenti');
-const Utenti = mongoose.model('utenti');
+require("../models/user");
+const User = mongoose.model("User");
 
-module.exports = function(passport){
-  passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
-    // Match user
-    Utenti.findOne({
-      email:email
-    }).then(utente => {
-      if(!utente){
-        return done(null, false, {message: 'Utente non trovato'});
-      } 
-
-      // Match password
-      bcrypt.compare(password, utente.password, (err, isMatch) => {
-        if(err) throw err;
-        if(isMatch){
-          return done(null, utente);
-        } else {
-          return done(null, false, {message: 'password non corretta'});
-        }
+module.exports = function (passport) {
+  passport.use(
+    new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
+      console.log(email);
+      User.findOne({
+        email: email,
       })
+        .then((user) => {
+          console.log(user);
+          if (!user) {
+            return done(null, false, { message: "User not found" });
+          }
+          console.log(user);
+          bcrypt.compare(password, user.password, (err, isMatch) => {
+            if (err) throw err;
+            console.log(err);
+            if (isMatch) {
+              return done(null, user);
+            } else {
+              return done(null, false, { message: "Password not correct" });
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
-  }));
+  );
 
-  passport.serializeUser(function(utente, done) {
-    done(null, utente.id);
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
   });
-  
-  passport.deserializeUser(function(id, done) {
-    Utenti.findById(id, function(err, utente) {
-      done(err, utente);
+  /*
+  User.deserializeUser(function (id, done) {
+    Utenti.findById(id, function (err, user) {
+      done(err, user);
     });
   });
-}
+*/
+  passport.deserializeUser(async function (id, done) {
+    const user = await User.findById(id)
+      .then((user) => {
+        done(null, user);
+      })
+      .catch((err) => {
+        done(err, user);
+      });
+  });
+};

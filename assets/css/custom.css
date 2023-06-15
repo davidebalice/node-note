@@ -1,6 +1,37 @@
-body{
-    background-color: #ddd;
-    font-family: Comfortaa, sans-serif;
+body {
+  background-color: #ddd;
+  font-family: Comfortaa, sans-serif;
+  padding: 0;
 }
 
-img{max-width: 30%}
+img {
+  max-width: 30%;
+}
+
+.p_zero {
+  padding: 0 !important;
+}
+
+.note {
+  width: 300px;
+  max-width: 300px;
+  height: 300px;
+  max-height: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background: #fefda2;
+  -webkit-box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
+}
+
+.note_container {
+  padding: 20px;
+}
+
+.note-int {
+  height: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
