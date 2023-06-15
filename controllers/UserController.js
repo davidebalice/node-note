@@ -10,7 +10,7 @@ const passport = require("passport");
 
 exports.Login = catchAsync(async (req, res, next) => {
   const title = "Login";
-  res.render("login", { title: title });
+  res.render("login", { title: title, isLogin: true });
 });
 
 exports.Registration = catchAsync(async (req, res, next) => {

@@ -35,3 +35,34 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.loginBox {
+  max-width: 500px;
+}
+
+.loginBg {
+  background: url("../img/bg1.jpg");
+  background-size: cover;
+  width: 100%;
+  height: calc(100vh - 100px);
+  padding-top: 60px;
+  margin-top: 0px !important;
+}
+
+.headerBg {
+  background-color: #333;
+  color: #fff;
+}
+
+.logoBox {
+  display: flex;
+  align-items: center;
+}
+
+.logoBox2 {
+  margin-left: 20px;
+}
+
+.white {
+  color: #fff !important;
+}

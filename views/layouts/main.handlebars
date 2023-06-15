@@ -10,10 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid p_zero">
+    <div class="container-fluid p_zero pb-0 mb-0">
     {{> _header}}
     </div>
-    <div class="container-fluid">
+    {{#if isLogin}}
+        <div class="container-fluid loginBg">
+    {{else}}
+        <div class="container-fluid">
+    {{/if}}
         {{> _avvisi}}
         {{> _errori}}
         {{{body}}}
