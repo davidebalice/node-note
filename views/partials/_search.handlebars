@@ -1,0 +1,51 @@
+<div class="searchContainer">
+  <div class="row">
+    <div class="col-md-auto col-12 ml-md-4">
+      <form action="/" method="get">
+        <div class="mb-2 ml-0 w-100 text-start mLeftSearch">
+          Search:
+        </div>
+        <div
+          class="row d-flex  align-items-end "
+          style="gap: 10px;"
+        >
+          <div class="mb-0 mt-0 w-md-100">
+            <input
+              type="text"
+              name="search"
+              class="form-control w-100"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" style="height:38px">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-3 d-md-none">
+      &nbsp;
+    </div>
+
+    <div class="col-md-auto col-12 ml-md-5">
+      <form action="/" method="get">
+        <div class="mb-2 mLeftSearch">
+          Search by date:
+        </div>
+        <div
+          class="row d-flex align-items-end"
+          style="gap: 10px;"
+        >
+          <div class="mb-0 mt-0">
+            <input type="date" name="startDate" class="form-control" required />
+          </div>
+          <div class="mb-0 mt-0">
+            <input type="date" name="endDate" class="form-control" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

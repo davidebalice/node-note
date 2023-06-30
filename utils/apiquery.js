@@ -5,21 +5,36 @@ class ApiQuery {
   }
 
   filter() {
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const queryObj = { ...this.queryString };
-    const expludeFields = ["sort", "page", "limit", "fields"];
-    expludeFields.forEach((el) => delete queryObj[el]);
+    const excludeFields = ["sort", "page", "limit", "fields"];
+    excludeFields.forEach((el) => delete queryObj[el]);
 
-    let queryString = JSON.stringify(queryObj);
-    queryString = queryString.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      (match) => `$${match}`
-    );
+    let filter = {};
 
-    this.query.find(JSON.parse(queryString));
+    if (queryObj.search) {
+      const searchValue = queryObj.search;
+      const regex = new RegExp(searchValue, "i");
+      filter.$or = [
+        { title: { $regex: regex } },
+        { description: { $regex: regex } },
+      ];
+    }
+
+    if (queryObj.startDate && queryObj.endDate) {
+      filter.data = {
+        $gte: new Date(queryObj.startDate),
+        $lte: new Date(queryObj.endDate),
+      };
+    }
+
+    this.query.find(filter);
 
     return this;
   }
+
+  /*
+mario@rossi.it
+*/
 
   sort() {
     if (this.queryString.sort) {

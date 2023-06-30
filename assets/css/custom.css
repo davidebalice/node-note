@@ -61,6 +61,7 @@ img {
 
 .logoBox2 {
   margin-left: 20px;
+  font-weight: bold;
 }
 
 .white {
@@ -75,6 +76,29 @@ img {
   margin-top: auto;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
+}
+
+.modalDetails {
+  background: #fefda2;
+  border: 0;
+  -webkit-box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
+}
+
+.borderNote {
+  border-color: #dfe10f;
+}
+
+.searchContainer {
+  background: #d1d1d1;
+  width: 100%;
+  padding: 20px;
+  -webkit-box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.24);
+}
+
+.mLeftSearch {
+  margin-left: -12px !important;
 }

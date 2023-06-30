@@ -11,9 +11,11 @@
     role="document"
     style="max-width:700px !important;width:700px !important;"
   >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+    <div class="modal-content modalDetails">
+      <div class="modal-header borderNote">
+        <h6 class="modal-title" id="modalDate">
+
+        </h6>
         <button
           type="button"
           class="close"
@@ -23,21 +25,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...trh qr4yrt rt rt
-        <br />
-        ...trh qr4yrt rt rt
-        <br />
-        ...trh qr4yrt rt rt
-        <br />
-        ...trh qr4yrt rt rt
-        <br />
-        ...trh qr4yrt rt rt
-        <br />
-        ...trh qr4yrt rt rt
-        <br />
+      <h5 class="modal-body mb-0 pb-0" id="modalTitle">
+
+      </h5>
+      <div class="modal-body" id="modalDescription">
+
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer borderNote">
         <button
           type="button"
           class="btn btn-secondary"
@@ -86,9 +80,9 @@
   {{#each note}}
     <div class="card card-body mb-5 note">
       <div class="note-int" onclick="$().viewModal('{{_id}}')">
-        <p style="margin-left:auto">{{data}}</p>
+        <p style="margin-left:auto" id="date{{_id}}">{{data}}</p>
         <h5 id="title{{_id}}">{{title}}</h5>
-        <p>{{description}}</p>
+        <p id="description{{_id}}">{{description}}</p>
       </div>
       <div class="noteButtons">
         <a
@@ -137,12 +131,10 @@
   tooltipTriggerList =
   [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]')); var
   tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) { return new
-  bootstrap.Tooltip(tooltipTriggerEl); }); });
-
-  function showDeleteConfirmation(id) {
-  document.getElementById('delId').value=id;
+  bootstrap.Tooltip(tooltipTriggerEl); }); }); function
+  showDeleteConfirmation(id) { document.getElementById('delId').value=id;
   $('#deleteConfirmationModal').modal('show'); } function deleteNote() {
-  $('#deleteConfirmationModal').modal('hide');
-  const id =  document.getElementById('delId').value;
+  $('#deleteConfirmationModal').modal('hide'); const id =
+  document.getElementById('delId').value;
   document.getElementById('deleteForm'+id).submit(); }
 </script>
