@@ -66,3 +66,15 @@ img {
 .white {
   color: #fff !important;
 }
+
+.noteButtons {
+  align-self: flex-end;
+  gap: 4px;
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+}
+
+.pointer{
+  cursor: pointer;
+}

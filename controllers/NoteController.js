@@ -98,7 +98,7 @@ exports.Store = catchAsync(async (req, res, next) => {
     };
     new Note(newNote).save().then((note) => {
       req.flash("msg_ok", "Note added");
-      res.redirect("/notes");
+      res.redirect("/");
     });
   }
 });
@@ -110,7 +110,7 @@ exports.Edit = catchAsync(async (req, res, next) => {
   }).then((note) => {
     if (note.user_id != req.user.id) {
       req.flash("msg_ko", "Reserved area");
-      res.redirect("/notes");
+      res.redirect("/");
     } else {
       res.render("edit_note", {
         note,
@@ -128,7 +128,7 @@ exports.Update = catchAsync(async (req, res, next) => {
     note.description = req.body.description;
     note.save().then((note) => {
       req.flash("msg_ok", "Nota updated");
-      res.redirect("/notes");
+      res.redirect("/");
     });
   });
 });
@@ -138,6 +138,6 @@ exports.Delete = catchAsync(async (req, res, next) => {
     _id: req.params.id,
   }).then(() => {
     req.flash("msg_ok", "Note deleted");
-    res.redirect("/notes");
+    res.redirect("/");
   });
 });

@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="{{base_url}}/css/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous"
+        />
 </head>
 <body>
     <div class="container-fluid p_zero pb-0 mb-0">
@@ -18,8 +23,8 @@
     {{else}}
         <div class="container-fluid">
     {{/if}}
-        {{> _avvisi}}
-        {{> _errori}}
+        {{> _alert}}
+        {{> _error}}
         {{{body}}}
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
