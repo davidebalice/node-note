@@ -1,0 +1,34 @@
+<div class="formCard">
+
+  <a href="/" class="back-button">
+    <button type="submit" class="btn btn-success buttonNote" name="aggiungi"> < Back</button>
+  </a>
+
+  <h3 class="my-5 titleSection">Add a note</h3>
+
+  <form action="{{base_url}}/add/note" method="post">
+    <div class="form-group">
+      <label for="titolo">
+        Category
+      </label>
+      <select
+        class="form-control noteField"
+        name="cat_id"
+      />
+      <option value=""> - Select - </option>
+      {{#each categories}}
+    <option value="{{this._id}}">{{this.title}}</option>
+  {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control noteField" name="title" />
+    </div>
+    <div class="form-group">
+      <label for="contenuto">Text</label>
+      <textarea class="form-control textArea noteField" name="description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success buttonNote" name="aggiungi">+ Add</button>
+  </form>
+</div>

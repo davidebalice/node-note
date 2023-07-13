@@ -32,10 +32,6 @@ class ApiQuery {
     return this;
   }
 
-  /*
-mario@rossi.it
-*/
-
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(",").join(" ");

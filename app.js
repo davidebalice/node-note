@@ -10,6 +10,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const noteRouter = require("./routes/noteRoutes");
 const userRouter = require("./routes/userRoutes");
+const categoryRouter = require("./routes/categoryRoutes");
 
 const { auth } = require("./helpers/auth");
 
@@ -17,13 +18,14 @@ const app = express();
 
 handlebarsHelpers({ exphbs });
 
-app.use("/css", express.static(__dirname + "/assets/css"));
-app.use("/img", express.static(__dirname + "/assets/img"));
-app.use("/js", express.static(__dirname + "/assets/js"));
+app.use("/css", express.static(__dirname + "/public/assets/css"));
+app.use("/img", express.static(__dirname + "/public/assets/img"));
+app.use("/js", express.static(__dirname + "/public/assets/js"));
 
 require("./config/passport")(passport);
 require("./models/note");
 require("./models/user");
+
 const User = mongoose.model("User");
 
 app.use(
@@ -53,6 +55,7 @@ app.use((req, res, next) => {
 
 app.use("/", noteRouter);
 app.use("/", userRouter);
+app.use("/", categoryRouter);
 
 app.post("/registration", (req, res) => {
   let errori = [];
@@ -114,42 +117,5 @@ app.get("/logout", (req, res) => {
   req.flash("msg_ok", "User disconnected");
   res.redirect("/");
 });
-
-/*
-const AppError = require('./utils/error');
-const globalErrorHandler = require('./controllers/errorController');
-
-const tourRouter = require('./routes/tourRoutes');
-const userRouter = require('./routes/userRoutes');
-
-//middleware
-app.use((req, res, next) => {
-  console.log('middlware test');
-  next();
-});
-
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  next();
-});
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-app.use(express.json());
-app.use('/api/v1/tours', tourRouter);
-app.use('/api/v1/users', userRouter);
-
-app.all('*', (req, res, next) => {
-  next(new AppError(`Cant find ${req.originalUrl}`));
-});
-
-app.use(globalErrorHandler);
-
-module.exports = app;
-
-
-*/
 
 module.exports = app;

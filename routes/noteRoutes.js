@@ -5,8 +5,6 @@ const passport = require("passport");
 const { auth } = require("../helpers/auth");
 
 router.route("/").get(auth, NoteController.Index);
-router.route("/info").get(NoteController.Info);
-router.route("/notes").get(auth, NoteController.Notes);
 router.route("/add/note").get(auth, NoteController.Add);
 router.route("/add/note").post(auth, NoteController.Store);
 router.route("/edit/note/:id").get(auth, NoteController.Edit);

@@ -9,11 +9,15 @@ const NoteSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  cat_id: {
+    type: String,
+    required: true,
+  },
   user_id: {
     type: String,
     required: true,
   },
-  data: {
+  date: {
     type: Date,
     default: Date.now,
   },

@@ -1,4 +1,5 @@
 const Note = require("../models/note");
+const Category = require("../models/category");
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
@@ -23,55 +24,31 @@ exports.Index = catchAsync(async (req, res, next) => {
     const note = await ApiFeatures.query;
 
     const arr = Object.keys(note).map((key) => {
-      let formattedData = moment(note[key].data).format("DD/MM/YYYY HH:mm");
+      let formattedDate = moment(note[key].date).format("DD/MM/YYYY HH:mm");
       return {
         _id: note[key]._id,
         title: note[key].title,
         description: note[key].description,
-        data: formattedData,
+        date: formattedDate,
       };
     });
 
-    res.render("index", { note: arr });
+    res.render("index", { title, note: arr, showSearch: true });
   } else {
     res.render("login");
   }
 });
 
-exports.Info = catchAsync(async (req, res, next) => {
-  const title = "Info";
-  res.render("info", { title: title });
-});
-
-exports.Notes = catchAsync(async (req, res, next) => {
-  const userId = req.user.id;
-  const ApiFeatures = new ApiQuery(
-    Note.find({ user_id: { $eq: userId } }),
-    req.query
-  )
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate();
-
-  const note = await ApiFeatures.query;
-
-  const arr = Object.keys(note).map((key) => {
-    let formattedData = moment(note[key].data).format("DD/MM/YYYY HH:mm");
-    return {
-      _id: note[key]._id,
-      title: note[key].title,
-      description: note[key].description,
-      data: formattedData,
-    };
-  });
-
-  res.render("notes", { note: arr });
-});
-
 exports.Add = catchAsync(async (req, res, next) => {
   const title = "Add note";
-  res.render("add_note", { title: title });
+  const categories = await Category.find({});
+
+  const categoryOptions = categories.map((category) => ({
+    _id: category._id,
+    title: category.title,
+  }));
+
+  res.render("note/add", { title: title, categories: categoryOptions });
 });
 
 exports.Store = catchAsync(async (req, res, next) => {
@@ -84,16 +61,16 @@ exports.Store = catchAsync(async (req, res, next) => {
   }
   if (error.length > 0) {
     console.log(error);
-    res.render("add_note", {
+    res.render("note/add", {
       error: error,
       title: req.body.title,
       description: req.body.description,
     });
   } else {
-    //res.send('ok, funziono!');
     const newNote = {
       title: req.body.title,
       description: req.body.description,
+      cat_id: req.body.cat_id,
       user_id: req.user.id,
     };
     new Note(newNote).save().then((note) => {
@@ -108,12 +85,13 @@ exports.Edit = catchAsync(async (req, res, next) => {
   await Note.findOne({
     _id: req.params.id,
   }).then((note) => {
+    //const formattedDate = moment(note.date).format("DD/MM/YYYY HH:mm");
     if (note.user_id != req.user.id) {
       req.flash("msg_ko", "Reserved area");
       res.redirect("/");
     } else {
-      res.render("edit_note", {
-        note,
+      res.render("note/edit", {
+        note: note.toObject(),
         title,
       });
     }

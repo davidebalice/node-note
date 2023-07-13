@@ -1,0 +1,64 @@
+<div class="formCard">
+
+  <a href="/" class="back-button">
+    <button type="submit" class="btn btn-success buttonNote" name="aggiungi"> < Back</button>
+  </a>
+
+  <h3 class="my-5 titleSection">Edit note</h3>
+
+        <form
+          action="{{base_url}}/edit/note/{{note._id}}?_method=POST"
+          method="post"
+        >
+          <input type="hidden" name="_method" value="POST" />
+         
+          <div class="form-group">
+            <label for="data">
+              Date
+            </label>
+            <input
+              type="datetime-local"
+              class="form-control noteField"
+              name="date"
+              value="{{note.date}}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="titolo">
+              Category
+            </label>
+            <select
+              class="form-control noteField"
+              name="cat_id"
+            />
+            <option value="23453456345345">test</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="titolo">
+              Title
+            </label>
+            <input
+              type="text"
+              class="form-control noteField"
+              name="title"
+              value="{{note.title}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="contenuto">
+              Description
+            </label>
+            <textarea
+              class="form-control textArea noteField"
+              name="description"
+            >{{note.description}}</textarea>
+          </div>
+          <button type="submit" class="btn btn-success buttonNote" name="update">
+            Update
+          </button>
+        </form>
+
+</div>

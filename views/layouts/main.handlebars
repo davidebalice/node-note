@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Note demo</title>
+    <title>Note management demo - Davide Balice</title>
+    <link rel="icon" href="{{base_url}}/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="{{base_url}}/css/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
@@ -19,7 +20,9 @@
         {{> _header}}
     </div>
     <div class="container-fluid p_zero pb-0 mb-0">
-        {{> _search}}
+        {{#if showSearch}}
+            {{> _search}}
+        {{/if}}
     </div>
     {{#if isLogin}}
         <div class="container-fluid loginBg">
