@@ -20,6 +20,14 @@ class ApiQuery {
       ];
     }
 
+    if (queryObj.cat_id) {
+      const searchValue = queryObj.cat_id;
+      console.log(searchValue);
+      filter.$or = [
+        { cat_id: searchValue },
+      ];
+    }
+
     if (queryObj.startDate && queryObj.endDate) {
       filter.data = {
         $gte: new Date(queryObj.startDate),

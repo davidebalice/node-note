@@ -22,18 +22,24 @@ exports.Index = catchAsync(async (req, res, next) => {
       .paginate();
 
     const note = await ApiFeatures.query;
-
-    const arr = Object.keys(note).map((key) => {
-      let formattedDate = moment(note[key].date).format("DD/MM/YYYY HH:mm");
-      return {
-        _id: note[key]._id,
-        title: note[key].title,
-        description: note[key].description,
-        date: formattedDate,
-      };
-    });
-
-    res.render("index", { title, note: arr, showSearch: true });
+    let formattedDate;
+    const arrayNote = await Promise.all(
+      Object.keys(note).map(async (key) => {
+        formattedDate = moment(note[key].date).format("DD/MM/YYYY HH:mm");
+        /*
+        const category = await Category.findById(note[key].cat_id); // Esegui la ricerca sulla collezione "categories" utilizzando l'ObjectId di cat_id
+        const title = category ? category.title : ''; // Estrai il titolo dalla categoria se è presente, altrimenti assegna una stringa vuota
+        */
+        return {
+          _id: note[key]._id,
+          title: note[key].title,
+          description: note[key].description,
+          cat_title: note[key].cat_id.title,
+          dateNote: formattedDate,
+        };
+      })
+    );
+    res.render("index", { title, note: arrayNote, showSearch: true });
   } else {
     res.render("login");
   }
@@ -60,7 +66,6 @@ exports.Store = catchAsync(async (req, res, next) => {
     error.push({ text: "Enter description" });
   }
   if (error.length > 0) {
-    console.log(error);
     res.render("note/add", {
       error: error,
       title: req.body.title,
@@ -104,6 +109,7 @@ exports.Update = catchAsync(async (req, res, next) => {
   }).then((note) => {
     note.title = req.body.title;
     note.description = req.body.description;
+    note.date = req.body.date;
     note.save().then((note) => {
       req.flash("msg_ok", "Nota updated");
       res.redirect("/");

@@ -10,17 +10,26 @@ const NoteSchema = mongoose.Schema({
     required: true,
   },
   cat_id: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: "Category",
     required: true,
   },
   user_id: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
     required: true,
   },
   date: {
     type: Date,
     default: Date.now,
   },
+});
+
+NoteSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "cat_id",
+    select: "title",
+  });
+  next();
 });
 
 const Note = mongoose.model("Note", NoteSchema);

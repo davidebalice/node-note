@@ -7,14 +7,14 @@
   <h3 class="my-5 titleSection">Categories</h3>
 
   {{#each category}}
-    <div class=" card-body mb-1 category">
+    <div class="card-body mb-1 category">
       <div class="category-int" onclick="$().viewModal('{{_id}}')">
         {{title}}
       </div>
       <div class="categoryButtons">
         <a
           class="btn btn-info"
-          href="{{base_url}}/edit/note/{{_id}}"
+          href="{{base_url}}/edit/category/{{_id}}"
           data-toggle="tooltip"
           data-placement="top"
           title="Edit"
@@ -22,20 +22,20 @@
           <i class="fas fa-pen"></i>
         </a>
         <form
-          action="{{base_url}}/delete/note/{{_id}}?_method=DELETE"
+          action="{{base_url}}/delete/category/{{_id}}?_method=DELETE"
           method="post"
           id="deleteForm{{_id}}"
         >
           <input type="hidden" name="_method" value="DELETE" />
-          <div
+          <button
+            type="submit"
             class="btn btn-danger pointer"
-            onclick="showDeleteConfirmation('{{_id}}')"
             data-toggle="tooltip"
             data-placement="top"
             title="Delete"
           >
             <i class="fas fa-trash"></i>
-          </div>
+          </button>
         </form>
       </div>
     </div>

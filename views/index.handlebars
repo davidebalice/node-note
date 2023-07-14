@@ -78,54 +78,12 @@
 
 <div class="row note_container">
   {{#each note}}
-    <div class="card card-body mb-5 note">
-      <div class="note-int" onclick="$().viewModal('{{_id}}')">
-        <p style="margin-left:auto" id="date{{_id}}">{{data}}</p>
-        <h5 id="title{{_id}}">{{title}}</h5>
-        <p id="description{{_id}}">{{description}}</p>
-      </div>
-      <div class="noteButtons">
-        <a
-          class="btn btn-info"
-          href="#"
-          onclick="$().viewModal('{{_id}}')"
-          data-toggle="tooltip"
-          data-placement="top"
-          title="Show"
-        >
-          <i class="fas fa-search"></i>
-        </a>
-        <a
-          class="btn btn-info"
-          href="{{base_url}}/edit/note/{{_id}}"
-          data-toggle="tooltip"
-          data-placement="top"
-          title="Edit"
-        >
-          <i class="fas fa-pen"></i>
-        </a>
-        <form
-          action="{{base_url}}/delete/note/{{_id}}?_method=DELETE"
-          method="post"
-          id="deleteForm{{_id}}"
-        >
-          <input type="hidden" name="_method" value="DELETE" />
-          <div
-            class="btn btn-danger pointer"
-            onclick="showDeleteConfirmation('{{_id}}')"
-            data-toggle="tooltip"
-            data-placement="top"
-            title="Delete"
-          >
-            <i class="fas fa-trash"></i>
-          </div>
-        </form>
-      </div>
-    </div>
+    {{> _notecard}}
   {{else}}
     <h3>Note not found</h3>
   {{/each}}
 </div>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() { var
   tooltipTriggerList =

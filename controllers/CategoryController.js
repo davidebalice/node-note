@@ -48,7 +48,6 @@ exports.Store = catchAsync(async (req, res, next) => {
     error.push({ text: "Enter title" });
   }
   if (error.length > 0) {
-    console.log(error);
     res.render("category/add", {
       error: error,
       title: req.body.title,
@@ -75,7 +74,7 @@ exports.Edit = catchAsync(async (req, res, next) => {
       res.redirect("/");
     } else {
       res.render("category/edit", {
-        category,
+        category: category.toObject(),
         title,
       });
     }
@@ -89,7 +88,7 @@ exports.Update = catchAsync(async (req, res, next) => {
     category.title = req.body.title;
     category.save().then((category) => {
       req.flash("msg_ok", "Nota updated");
-      res.redirect("/");
+      res.redirect("/categories");
     });
   });
 });
@@ -99,6 +98,6 @@ exports.Delete = catchAsync(async (req, res, next) => {
     _id: req.params.id,
   }).then(() => {
     req.flash("msg_ok", "Category deleted");
-    res.redirect("/");
+    res.redirect("/categories");
   });
 });
