@@ -90,13 +90,14 @@ exports.Edit = catchAsync(async (req, res, next) => {
   await Note.findOne({
     _id: req.params.id,
   }).then((note) => {
-    //const formattedDate = moment(note.date).format("DD/MM/YYYY HH:mm");
+    const formattedDate = moment(note.date).format("YYYY-MM-DDTHH:mm");
     if (note.user_id != req.user.id) {
       req.flash("msg_ko", "Reserved area");
       res.redirect("/");
     } else {
       res.render("note/edit", {
         note: note.toObject(),
+        formattedDate,
         title,
       });
     }
