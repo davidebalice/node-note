@@ -3,15 +3,6 @@ const port = process.env.PORT || 8000;
 const db = require("./config/database");
 
 mongoose.Promise = global.Promise;
-/*
-mongoose
-  .connect(db.mongoURI, {
-    useNewUrlParser: true,
-  })
-  .then(() => console.log(" Server connected"))
-  .catch((err) => console.log(err));
-*/
-
 mongoose
   .connect(db.mongoURI, {
     useNewUrlParser: true,

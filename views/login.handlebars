@@ -2,7 +2,24 @@
   <div class="card my-5">
     <form class="p-5 mb-3" method="post" action="/login">
       <div class="form-group">
+
+        {{#if demoMode}}
+          <p class="loginMsg">
+            <span class="red">Demo mode active</span>
+            <br />
+            the CRUD operations are not allowed
+          </p>
+          <div class="loginDemoData">
+            <strong>Demo data</strong>:
+            <br />
+            mario@rossi.it
+            <br />
+            12345678
+          </div>
+        {{/if}}
+
         <label for="email">Email</label>
+
         <input
           type="email"
           class="form-control"

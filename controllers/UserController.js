@@ -7,10 +7,11 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/error");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const demoMode = require('../config/demo');
 
 exports.Login = catchAsync(async (req, res, next) => {
   const title = "Login";
-  res.render("login", { title: title, isLogin: true });
+  res.render("login", { title: title, isLogin: true, demoMode });
 });
 
 exports.Registration = catchAsync(async (req, res, next) => {

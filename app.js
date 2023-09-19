@@ -30,7 +30,7 @@ const User = mongoose.model("User");
 
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "davidebalice.dev",
     resave: false,
     saveUninitialized: false,
   })

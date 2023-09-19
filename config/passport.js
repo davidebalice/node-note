@@ -37,13 +37,7 @@ module.exports = function (passport) {
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
-  /*
-  User.deserializeUser(function (id, done) {
-    Utenti.findById(id, function (err, user) {
-      done(err, user);
-    });
-  });
-*/
+
   passport.deserializeUser(async function (id, done) {
     const user = await User.findById(id)
       .then((user) => {

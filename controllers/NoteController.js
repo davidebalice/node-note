@@ -21,15 +21,14 @@ exports.Index = catchAsync(async (req, res, next) => {
       .limitFields()
       .paginate();
 
+    const flashMessage = req.session.flashMessage || "";
+    req.session.flashMessage = null;
+
     const note = await ApiFeatures.query;
     let formattedDate;
     const arrayNote = await Promise.all(
       Object.keys(note).map(async (key) => {
         formattedDate = moment(note[key].date).format("DD/MM/YYYY HH:mm");
-        /*
-        const category = await Category.findById(note[key].cat_id); // Esegui la ricerca sulla collezione "categories" utilizzando l'ObjectId di cat_id
-        const title = category ? category.title : ''; // Estrai il titolo dalla categoria se è presente, altrimenti assegna una stringa vuota
-        */
         return {
           _id: note[key]._id,
           title: note[key].title,
@@ -39,7 +38,12 @@ exports.Index = catchAsync(async (req, res, next) => {
         };
       })
     );
-    res.render("index", { title, note: arrayNote, showSearch: true });
+    res.render("index", {
+      title,
+      note: arrayNote,
+      showSearch: true,
+      flashMessage,
+    });
   } else {
     res.render("login");
   }
@@ -54,7 +58,14 @@ exports.Add = catchAsync(async (req, res, next) => {
     title: category.title,
   }));
 
-  res.render("note/add", { title: title, categories: categoryOptions });
+  const flashMessage = req.session.flashMessage || "";
+  req.session.flashMessage = null;
+
+  res.render("note/add", {
+    title: title,
+    categories: categoryOptions,
+    flashMessage,
+  });
 });
 
 exports.Store = catchAsync(async (req, res, next) => {
@@ -95,10 +106,13 @@ exports.Edit = catchAsync(async (req, res, next) => {
       req.flash("msg_ko", "Reserved area");
       res.redirect("/");
     } else {
+      const flashMessage = req.session.flashMessage || "";
+      req.session.flashMessage = null;
       res.render("note/edit", {
         note: note.toObject(),
         formattedDate,
         title,
+        flashMessage,
       });
     }
   });
@@ -119,10 +133,11 @@ exports.Update = catchAsync(async (req, res, next) => {
 });
 
 exports.Delete = catchAsync(async (req, res, next) => {
-  Note.deleteOne({
-    _id: req.params.id,
-  }).then(() => {
-    req.flash("msg_ok", "Note deleted");
-    res.redirect("/");
-  });
+  const doc = await Note.findByIdAndDelete(req.params.id);
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+  const flashMessage = req.session.flashMessage;
+  req.session.flashMessage = null;
+  res.redirect("/");
 });
