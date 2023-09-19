@@ -26,13 +26,27 @@ exports.Index = catchAsync(async (req, res, next) => {
 
     const note = await ApiFeatures.query;
     let formattedDate;
+    let truncatedText;
+
+    function limitTextWithEllipsis(text, maxLength) {
+      if (text.length <= maxLength) {
+        return text; // Restituisce il testo senza modifiche se è inferiore o uguale alla lunghezza massima consentita.
+      } else {
+        return text.slice(0, maxLength) + "..."; // Restituisce il testo limitato con "..."
+      }
+    }
+
     const arrayNote = await Promise.all(
       Object.keys(note).map(async (key) => {
         formattedDate = moment(note[key].date).format("DD/MM/YYYY HH:mm");
+
+        truncatedTitle = limitTextWithEllipsis(note[key].title, 60);
+        truncatedText = limitTextWithEllipsis(note[key].description, 190);
+
         return {
           _id: note[key]._id,
-          title: note[key].title,
-          description: note[key].description,
+          title: truncatedTitle,
+          description: truncatedText,
           cat_title: note[key].cat_id.title,
           dateNote: formattedDate,
         };
@@ -100,19 +114,31 @@ exports.Edit = catchAsync(async (req, res, next) => {
   const title = "Edit note";
   await Note.findOne({
     _id: req.params.id,
-  }).then((note) => {
+  }).then(async (note) => {
     const formattedDate = moment(note.date).format("YYYY-MM-DDTHH:mm");
     if (note.user_id != req.user.id) {
       req.flash("msg_ko", "Reserved area");
       res.redirect("/");
     } else {
+      const categories = await Category.find({});
+
+      const categoryOptions = categories.map((category) => ({
+        _id: category._id.toString(),
+        title: category.title,
+      }));
+
       const flashMessage = req.session.flashMessage || "";
       req.session.flashMessage = null;
+
+      const catIdString = note.cat_id.id.toString();
+
       res.render("note/edit", {
         note: note.toObject(),
         formattedDate,
         title,
         flashMessage,
+        catIdString,
+        categories: categoryOptions,
       });
     }
   });

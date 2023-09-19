@@ -1,13 +1,13 @@
 <div class="card card-body mb-5 note">
-  <div class="note-int" onclick="$().viewModal('{{_id}}')">
+  <div class="noteInt" onclick="$().viewModal('{{_id}}')">
     <div class="catContainer">
       <p class="containerTitle">
         {{cat_title}}
       </p>
     </div>
     <p style="margin-left:auto" id="date{{_id}}">{{dateNote}}</p>
-    <h5 id="title{{_id}}">{{title}}</h5>
-    <p id="description{{_id}}">{{description}}</p>
+    <h5 id="title{{_id}}" class="noteTitle">{{title}}</h5>
+    <p id="description{{_id}}" class="noteDescription">{{description}}</p>
   </div>
   <div class="noteButtons">
     <a

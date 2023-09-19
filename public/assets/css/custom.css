@@ -9,7 +9,11 @@ body {
 }
 
 .home {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 243px);
+}
+
+.page {
+  min-height: calc(100vh - 173px);
 }
 
 .note {
@@ -29,11 +33,21 @@ body {
   padding: 20px;
 }
 
-.note-int {
-  height: 300px;
+.noteInt {
+  height: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
+}
+
+.noteTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+}
+
+.noteDescription {
+  font-size: 13px;
 }
 
 .loginBox {
@@ -54,12 +68,40 @@ body {
   color: #fff;
 }
 
+.github {
+  width: 96px;
+  padding-top: 8px;
+  padding-left: 10px;
+}
+
 .footer {
   background-color: #333;
   color: #fff;
   display: flex;
   padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footerCol {
+  display: flex;
   justify-content: start;
+  align-items: center;
+}
+
+.footerLogo {
+  width: 126px;
+  padding: 2px;
+}
+
+.footerGithub {
+  width: 110px;
+  padding: 10px;
 }
 
 .logo {
@@ -73,6 +115,7 @@ body {
 
 .logoBox2 {
   margin-left: 20px;
+  margin-right: 20px;
   font-weight: bold;
 }
 
@@ -90,6 +133,15 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.modalSize {
+  width: 100vw !important;
+  height: 100vh !important;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: center;
 }
 
 .modalDetails {

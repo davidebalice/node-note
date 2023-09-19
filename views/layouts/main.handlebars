@@ -32,7 +32,12 @@
     {{#if isLogin}}
         <div class="container-fluid loginBg">
     {{else}}
-        <div class="container-fluid home">
+       
+        {{#if showSearch}}
+             <div class="container-fluid home">
+        {{else}}
+             <div class="container-fluid page">
+        {{/if}}
     {{/if}}
         {{> _alert}}
         {{> _error}}

@@ -1,3 +1,3 @@
-const demoMode = true;
+const demoMode = false;
 
 module.exports = demoMode;
