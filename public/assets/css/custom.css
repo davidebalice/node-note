@@ -17,10 +17,10 @@ body {
 }
 
 .note {
-  width: 300px;
-  max-width: 300px;
-  height: 300px;
-  max-height: 300px;
+  width: 320px;
+  max-width: 320px;
+  height: 320px;
+  max-height: 320px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -140,13 +140,13 @@ body {
   height: 100vh !important;
   display: flex;
   align-items: center;
-  position: fixed;
   justify-content: center;
 }
 
 .modalDetails {
   background: #fefda2;
   border: 0;
+  margin: 0 auto;
   -webkit-box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
   box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.24);
 }
@@ -221,18 +221,28 @@ body {
 }
 
 .catContainer {
-  text-align: right;
-  width: 100%;
+  text-align: left;
+  clear: both;
 }
 
 .containerTitle {
   width: fit-content;
   background-color: #555;
   color: #fff;
-  float: right;
   font-size: 12px;
   padding: 6px 10px 6px 10px;
   border-radius: 4px;
+}
+
+.sticky-button {
+  color: #ccc;
+  padding: 0;
+  float: right;
+  font-size: 24px;
+}
+
+.sticky-on {
+  color: #14a2b8;
 }
 
 .loginMsg {

@@ -101,3 +101,7 @@ exports.Delete = catchAsync(async (req, res, next) => {
     res.redirect("/categories");
   });
 });
+
+
+
+

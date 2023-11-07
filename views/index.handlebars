@@ -1,10 +1,8 @@
 <div
-  class="modal fade mt-5"
+  class="modal fade" 
   id="noteModal"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true"
 >
   <div
     class="modal-dialog modalSize"
@@ -86,14 +84,51 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() { var
-  tooltipTriggerList =
-  [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]')); var
-  tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) { return new
-  bootstrap.Tooltip(tooltipTriggerEl); }); }); function
-  showDeleteConfirmation(id) { document.getElementById('delId').value=id;
-  $('#deleteConfirmationModal').modal('show'); } function deleteNote() {
-  $('#deleteConfirmationModal').modal('hide'); const id =
-  document.getElementById('delId').value;
-  document.getElementById('deleteForm'+id).submit(); }
+  document.addEventListener('DOMContentLoaded', function() { 
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]')); 
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) { 
+      return new bootstrap.Tooltip(tooltipTriggerEl); 
+    }); 
+  }); 
+
+  function showDeleteConfirmation(id) { 
+    document.getElementById('delId').value=id;
+    $('#deleteConfirmationModal').modal('show'); 
+  } 
+    
+  function deleteNote() {
+      $('#deleteConfirmationModal').modal('hide'); const id =
+      document.getElementById('delId').value;
+      document.getElementById('deleteForm'+id).submit(); 
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.sticky-button').forEach(button => {
+        button.addEventListener('click', (event) => { 
+          const id = event.target.getAttribute('data-id'); 
+          const action = event.target.getAttribute('data-action'); 
+        
+          if(id){
+            const updateUrl = `/sticky/note/${id}`;
+            const requestBody = {
+                action: action,
+              };
+              fetch(updateUrl, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+              })
+              .then(data => {
+                console.log('Response:', data);
+                window.location.href = '/';
+              })
+              .catch(error => {
+                console.error('API error:', error);
+              });
+            }
+      }); 
+    }); 
+  }); 
 </script>

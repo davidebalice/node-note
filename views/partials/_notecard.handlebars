@@ -1,15 +1,40 @@
 <div class="card card-body mb-5 note">
-  <div class="noteInt" onclick="$().viewModal('{{_id}}')">
-    <div class="catContainer">
-      <p class="containerTitle">
-        {{cat_title}}
-      </p>
-    </div>
+  <div class="noteInt">
+    {{#if sticky}}
+      <a
+        class="btn sticky-button sticky-on"
+        href="#"
+        data-id="{{_id}}"
+        data-action="off"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Sticky note"
+      >
+        <i class="fas fa-thumbtack" data-id="{{_id}}" data-action="off"></i>
+      </a>
+    {{else}}
+      <a
+        class="btn sticky-button"
+        href="#"
+        data-id="{{_id}}"
+        data-action="on"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Sticky note"
+      >
+        <i class="fas fa-thumbtack" data-id="{{_id}}" data-action="on"></i>
+      </a>
+    {{/if}}
+
+    <p class="containerTitle">
+      {{cat_title}}
+    </p>
     <p style="margin-left:auto" id="date{{_id}}">{{dateNote}}</p>
     <h5 id="title{{_id}}" class="noteTitle">{{title}}</h5>
     <p id="description{{_id}}" class="noteDescription">{{description}}</p>
   </div>
   <div class="noteButtons">
+
     <a
       class="btn btn-info"
       href="#"

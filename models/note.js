@@ -27,6 +27,10 @@ const NoteSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  sticky: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 NoteSchema.pre(/^find/, function (next) {

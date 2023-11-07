@@ -17,7 +17,7 @@ exports.Index = catchAsync(async (req, res, next) => {
       req.query
     )
       .filter()
-      .sort()
+      .sort({ sticky: 1, Date: -1 })
       .limitFields()
       .paginate();
 
@@ -30,9 +30,9 @@ exports.Index = catchAsync(async (req, res, next) => {
 
     function limitTextWithEllipsis(text, maxLength) {
       if (text.length <= maxLength) {
-        return text; // Restituisce il testo senza modifiche se è inferiore o uguale alla lunghezza massima consentita.
+        return text;
       } else {
-        return text.slice(0, maxLength) + "..."; // Restituisce il testo limitato con "..."
+        return text.slice(0, maxLength) + "...";
       }
     }
 
@@ -48,10 +48,24 @@ exports.Index = catchAsync(async (req, res, next) => {
           title: truncatedTitle,
           description: truncatedText,
           cat_title: note[key].cat_id.title,
+          date: note[key].date,
           dateNote: formattedDate,
+          sticky: note[key].sticky,
         };
       })
     );
+
+    arrayNote.sort((a, b) => {
+      if (a.sticky && !b.sticky) {
+        return -1;
+      }
+      if (!a.sticky && b.sticky) {
+        return 1;
+      }
+
+      return new Date(b.date) - new Date(a.date);
+    });
+
     res.render("index", {
       title,
       note: arrayNote,
@@ -166,4 +180,21 @@ exports.Delete = catchAsync(async (req, res, next) => {
   const flashMessage = req.session.flashMessage;
   req.session.flashMessage = null;
   res.redirect("/");
+});
+
+exports.Sticky = catchAsync(async (req, res, next) => {
+  Note.findOne({
+    _id: req.params.id,
+  }).then((note) => {
+    if (req.body.action == "on") {
+      note.sticky = true;
+    } else {
+      note.sticky = false;
+    }
+    note.save().then((note) => {
+      res.status(200).json({
+        updated: "ok",
+      });
+    });
+  });
 });

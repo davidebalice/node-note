@@ -17,6 +17,8 @@ router
   .get(auth, NoteController.Edit)
   .post(auth, demoMode, NoteController.Update);
 
+router.route("/sticky/note/:id").post(auth, demoMode, NoteController.Sticky);
+
 router.route("/delete/note/:id").post(auth, demoMode, NoteController.Delete);
 
 module.exports = router;
