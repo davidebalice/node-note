@@ -1,5 +1,5 @@
 {
-  "name": "mynote",
+  "name": "note",
   "version": "1.0.0",
   "description": "Note management",
   "main": "app.js",
@@ -10,7 +10,7 @@
   "engines": {
     "node": "8.8.1"
   },
-  "author": "Davide",
+  "author": "Davide Balice",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -23,6 +23,7 @@
     "handlebars-helpers": "^0.10.0",
     "method-override": "^2.3.10",
     "mongoose": "^7.0.3",
+    "note": "file:",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
   }

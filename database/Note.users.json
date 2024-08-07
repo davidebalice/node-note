@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "6425bb621e6f2eeb8eea0a55"
+  },
+  "email": "mario@rossi.it",
+  "password": "$2a$10$LNcyZ2X9TuSUL6ratLQG7OymuNn4ldLHjGDW8S6Pw7V7VIProTVC.",
+  "data": {
+    "$date": "2023-03-30T16:40:02.495Z"
+  },
+  "__v": 0,
+  "role": "admin",
+  "name": "mario",
+  "surname": "rossi"
+}]
